@@ -17,4 +17,6 @@ RUN make
 RUN ln -s /src/profiles/car.lua profile.lua
 RUN ln -s /src/profiles/lib/
 
+ADD run.sh run.sh
+
 EXPOSE 5000
