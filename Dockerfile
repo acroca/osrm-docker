@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 RUN apt-get update
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential git \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential git curl \
     cmake pkg-config libprotoc-dev libprotobuf8 protobuf-compiler \
     libprotobuf-dev libosmpbf-dev libpng12-dev libtbb-dev libbz2-dev \
     libstxxl-dev libstxxl-doc libstxxl1 libxml2-dev libzip-dev \
