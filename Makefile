@@ -11,8 +11,14 @@ build:
 	docker build -t osrm .
 
 prepare-barcelona:
-	$(call prepare,"http://download.bbbike.org/osm/bbbike/Barcelona/Barcelona.osm.pbf","Barcelona")
+	$(call prepare,"https://s3.amazonaws.com/metro-extracts.mapzen.com/barcelona_spain.osm.pbf","Barcelona")
 
 run-barcelona:
 	$(call run,"Barcelona")
+
+prepare-london:
+	$(call prepare,"http://download.geofabrik.de/europe/great-britain/england/greater-london-latest.osm.pbf","London")
+
+run-london:
+	$(call run,"London")
 
