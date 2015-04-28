@@ -2,28 +2,32 @@
 
 This project lets you prepare and run a docker container with OSRM and the map of your choice.
 
-## Setup
+## Run
 
-First build the docker image:
+First you'll need to prepare the url to your `.osm.pfb` source file.
 
-```
-make build
-```
-
-The image is tagged as `osrm`
-
-## Prepare the map
-
-For now the only hardcoded map available to use is Barcelona. Is not hard to change (check the Makefile), you just need the URL to a different `.osm.pfb` file.
+Run your data container. The data container will keep your map files even if you restart your OSRM server.
 
 ```
-make prepare-barcelona
+docker run \
+    -v /data \
+    --name osrm-data \
+    acroca/osrm-docker:latest \
+    echo "running data container..."
 ```
 
-## Run the app
-
-Once the OSRM map is extracted and prepared, you are ready to run the server. Again, the current code just supports Barcelona, but it's very easy to change.
+Now you can run your osrm server with any map.
 
 ```
-make run-barcelona
+docker run \
+    -d \
+    --volumes-from osrm-data \
+    -p 5000:5000 \
+    acroca/osrm-docker:latest \
+    ./run.sh \
+        Barcelona \
+        "https://s3.amazonaws.com/metro-extracts.mapzen.com/barcelona_spain.osm.pbf"
 ```
+
+The first argument is the name you want to give to the map. It's used mostly as a file name in the data storage.
+The second argument is the URL to your source map file.
