@@ -13,6 +13,6 @@ if [ ! -f $DATA_PATH/$1.osrm ]; then
     ./osrm-prepare $DATA_PATH/$1.osrm
 fi
 
-./osrm-routed $DATA_PATH/$1.osrm &
+./osrm-routed $DATA_PATH/$1.osrm --max-table-size 8000 &
 child=$!
 wait "$child"
