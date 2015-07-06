@@ -15,6 +15,7 @@ RUN \
   cmake /src && make && \
   mv /src/profiles/car.lua profile.lua && \
   mv /src/profiles/lib/ lib && \
+  echo "disk=/tmp/stxxl,25000,syscall" > /build/.stxxl && \
   rm -rf /src
 
 WORKDIR /build
