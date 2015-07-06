@@ -8,9 +8,12 @@ _sig() {
 trap _sig SIGKILL SIGTERM SIGHUP SIGINT EXIT
 
 if [ ! -f $DATA_PATH/$1.osrm ]; then
+  if [ ! -f $DATA_PATH/$1.osm.pbf ]; then
     curl $2 > $DATA_PATH/$1.osm.pbf
-    ./osrm-extract $DATA_PATH/$1.osm.pbf
-    ./osrm-prepare $DATA_PATH/$1.osrm
+  fi
+  ./osrm-extract $DATA_PATH/$1.osm.pbf
+  ./osrm-prepare $DATA_PATH/$1.osrm
+  rm $DATA_PATH/$1.osm.pbf
 fi
 
 ./osrm-routed $DATA_PATH/$1.osrm --max-table-size 8000 &
